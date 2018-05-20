@@ -35,6 +35,9 @@
 		07E049B020B030AC0079E5C6 /* SlidingDatasSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F91DB01C75EF9E00D461D2 /* SlidingDatasSource.swift */; };
 		07E049B120B030AC0079E5C6 /* MessagesSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */; };
 		07E049B220B030AC0079E5C6 /* BaseMessagesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */; };
+		07E049B520B162F00079E5C6 /* TBSlidingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E049B420B162F00079E5C6 /* TBSlidingDataSource.swift */; };
+		07E049B720B1630A0079E5C6 /* TBChatCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E049B620B1630A0079E5C6 /* TBChatCommon.swift */; };
+		07E049B920B16B070079E5C6 /* TBChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E049B820B16B070079E5C6 /* TBChatViewController.swift */; };
 		0997CD2F2042E42100D7BDF9 /* CellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997CD2E2042E42100D7BDF9 /* CellsViewController.swift */; };
 		0997CD312042E58400D7BDF9 /* ChatWithTabBarExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997CD302042E58400D7BDF9 /* ChatWithTabBarExamplesViewController.swift */; };
 		1A0602E67CD800976B387A3E /* Pods_TestChatto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D1016F94F040AD0AA2AD5A /* Pods_TestChatto.framework */; };
@@ -101,6 +104,9 @@
 		07E0499220B02E780079E5C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07E0499520B02E780079E5C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07E0499720B02E780079E5C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07E049B420B162F00079E5C6 /* TBSlidingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBSlidingDataSource.swift; sourceTree = "<group>"; };
+		07E049B620B1630A0079E5C6 /* TBChatCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBChatCommon.swift; sourceTree = "<group>"; };
+		07E049B820B16B070079E5C6 /* TBChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBChatViewController.swift; sourceTree = "<group>"; };
 		0997CD2E2042E42100D7BDF9 /* CellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsViewController.swift; sourceTree = "<group>"; };
 		0997CD302042E58400D7BDF9 /* ChatWithTabBarExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithTabBarExamplesViewController.swift; sourceTree = "<group>"; };
 		13A796C853501DB82BA5DC27 /* Pods_ChattoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChattoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +195,9 @@
 		07E049B320B033F10079E5C6 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				07E049B420B162F00079E5C6 /* TBSlidingDataSource.swift */,
+				07E049B620B1630A0079E5C6 /* TBChatCommon.swift */,
+				07E049B820B16B070079E5C6 /* TBChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -587,10 +596,12 @@
 				07E049B020B030AC0079E5C6 /* SlidingDatasSource.swift in Sources */,
 				07E049B120B030AC0079E5C6 /* MessagesSelectorProtocol.swift in Sources */,
 				07E049B220B030AC0079E5C6 /* BaseMessagesSelector.swift in Sources */,
+				07E049B520B162F00079E5C6 /* TBSlidingDataSource.swift in Sources */,
 				07E049A220B030390079E5C6 /* BaseMessageHandler.swift in Sources */,
 				07E049A320B030390079E5C6 /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
 				07E049A420B030390079E5C6 /* DemoPhotoMessageHandler.swift in Sources */,
 				07E049A520B030390079E5C6 /* DemoPhotoMessageModel.swift in Sources */,
+				07E049B720B1630A0079E5C6 /* TBChatCommon.swift in Sources */,
 				07E049A620B030390079E5C6 /* DemoPhotoMessageViewModel.swift in Sources */,
 				07E049A720B030390079E5C6 /* SendingStatusCollectionViewCell.swift in Sources */,
 				07E049A820B030390079E5C6 /* SendingStatusCollectionViewCell.xib in Sources */,
@@ -600,6 +611,7 @@
 				07E049AC20B030390079E5C6 /* DemoTextMessageViewModel.swift in Sources */,
 				07E049AD20B030390079E5C6 /* TimeSeparatorModel.swift in Sources */,
 				07E049AE20B030390079E5C6 /* TimeSeparatorPresenter.swift in Sources */,
+				07E049B920B16B070079E5C6 /* TBChatViewController.swift in Sources */,
 				07E049AF20B030390079E5C6 /* TimeSeparatorCollectionViewCell.swift in Sources */,
 				07E0499B20B0300F0079E5C6 /* AddRandomMessageChatViewController.swift in Sources */,
 				07E0499D20B0300F0079E5C6 /* DemoChatItemsDecorator.swift in Sources */,

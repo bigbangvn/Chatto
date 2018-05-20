@@ -30,7 +30,9 @@ public enum InsertPosition {
 }
 
 public class SlidingDataSource<Element> {
-
+    typealias LoadBlock = (_ loadedItems: [Element]) -> Void
+    
+    private var isLoading: Bool = false
     private var pageSize: Int
     private var windowOffset: Int
     private var windowCount: Int
@@ -67,7 +69,43 @@ public class SlidingDataSource<Element> {
             self.insertItem(itemGenerator(), position: .top)
         }
     }
+    
+    private func loadMoreItems(_ numItemNeeded: Int, position: InsertPosition, completion: @escaping LoadBlock) {
+        guard let itemGenerator = self.itemGenerator else {
+            fatalError()
+        }
+        var items = [Element]()
+        for _ in 0..<numItemNeeded {
+            items.append(itemGenerator())
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { //Simulate delay when load from server
+            completion(items)
+        }
+    }
 
+    public func insertItems(_ items: [Element], position: InsertPosition) {
+        let n = items.count
+        if position == .top {
+            self.items.insert(contentsOf: items, at: 0)
+            let shouldExpandWindow = self.itemsOffset == self.windowOffset
+            self.itemsOffset -= n
+            if shouldExpandWindow {
+                self.windowOffset -= n
+                self.windowCount += n
+            } else {
+                assertionFailure()
+            }
+        } else {
+            let shouldExpandWindow = self.itemsOffset + self.items.count == self.windowOffset + self.windowCount
+            if shouldExpandWindow {
+                self.windowCount += n
+            } else {
+                assertionFailure()
+            }
+            self.items.append(contentsOf: items);
+        }
+    }
+    
     public func insertItem(_ item: Element, position: InsertPosition) {
         if position == .top {
             self.items.insert(item, at: 0)
@@ -94,10 +132,33 @@ public class SlidingDataSource<Element> {
         return self.windowOffset + self.windowCount < self.itemsOffset + self.items.count
     }
 
+    public func loadPrevious(_ completion: EmptyBlock?) {
+        guard self.isLoading == false else {
+            return
+        }
+        self.isLoading = true
+        print("\(#function)")
+        
+        let pSize = self.pageSize + Int(arc4random() % 10) //Test variable page size
+        let nextWindowOffset = max(0, self.windowOffset - pSize)
+        let messagesNeeded = self.itemsOffset - nextWindowOffset
+        if messagesNeeded > 0 {
+            let position = InsertPosition.top
+            self.loadMoreItems(messagesNeeded, position: position) {[weak self] (items) in
+                guard let me = self else { return }
+                print("\(#function) finished: \(items.count)")
+                me.insertItems(items, position: position)
+                completion?()
+                me.isLoading = false
+            }
+        }
+    }
+    
     public func loadPrevious() {
+        let pSize = self.pageSize + Int(arc4random() % 10)
         let previousWindowOffset = self.windowOffset
         let previousWindowCount = self.windowCount
-        let nextWindowOffset = max(0, self.windowOffset - self.pageSize)
+        let nextWindowOffset = max(0, self.windowOffset - pSize)
         let messagesNeeded = self.itemsOffset - nextWindowOffset
         if messagesNeeded > 0 {
             self.generateItems(messagesNeeded, position: .top)
@@ -109,8 +170,11 @@ public class SlidingDataSource<Element> {
 
     public func loadNext() {
         guard self.items.count > 0 else { return }
+        
+        let pSize = self.pageSize + Int(arc4random() % 10)
+        
         let itemCountAfterWindow = self.itemsOffset + self.items.count - self.windowOffset - self.windowCount
-        self.windowCount += min(self.pageSize, itemCountAfterWindow)
+        self.windowCount += min(pSize, itemCountAfterWindow)
     }
 
     @discardableResult

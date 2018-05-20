@@ -72,9 +72,17 @@ class DemoChatDataSource: ChatDataSourceProtocol {
     }
 
     func loadPrevious() {
+#if true //Test load async, variable page size
+        self.slidingWindow.loadPrevious {[weak self] in
+            guard let me = self else { return }
+            me.slidingWindow.adjustWindow(focusPosition: 0, maxWindowSize: me.preferredMaxWindowSize)
+            me.delegate?.chatDataSourceDidUpdate(me, updateType: .pagination)
+        }
+#else
         self.slidingWindow.loadPrevious()
         self.slidingWindow.adjustWindow(focusPosition: 0, maxWindowSize: self.preferredMaxWindowSize)
         self.delegate?.chatDataSourceDidUpdate(self, updateType: .pagination)
+#endif
     }
 
     func addTextMessage(_ text: String) {

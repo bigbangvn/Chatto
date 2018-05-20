@@ -9,20 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btn = UIButton(frame: CGRect(x: 100, y: 250, width: 60, height: 60))
         btn.setTitle("Enter chat", for: .normal)
         btn.addTarget(self, action: #selector(gotoChat), for: .touchUpInside)
         btn.backgroundColor = .blue
         view.addSubview(btn)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        btn.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
+    }
 
     @objc func gotoChat() {
-        let dataSource = DemoChatDataSource(count: 100, pageSize: 50)
-        let viewController = DemoChatViewController()
+        let dataSource = DemoChatDataSource(count: 100, pageSize: 10)
+        let viewController = TBChatViewController()
         viewController.dataSource = dataSource
         self.navigationController?.pushViewController(viewController, animated: true)
     }
