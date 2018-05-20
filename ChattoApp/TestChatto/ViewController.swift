@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
     @objc func gotoChat() {
         let dataSource = DemoChatDataSource(count: 100, pageSize: 10)
-        let viewController = TBChatViewController()
+        let viewController = TBDemoChatViewController()
         viewController.dataSource = dataSource
         self.navigationController?.pushViewController(viewController, animated: true)
     }
