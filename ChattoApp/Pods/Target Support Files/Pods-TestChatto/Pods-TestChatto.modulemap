@@ -1,0 +1,6 @@
+framework module Pods_TestChatto {
+  umbrella header "Pods-TestChatto-umbrella.h"
+
+  export *
+  module * { export * }
+}

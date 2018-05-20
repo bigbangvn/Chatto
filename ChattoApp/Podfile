@@ -5,3 +5,8 @@ target 'ChattoApp' do
 	pod 'Chatto', :path => ".."
 	pod 'ChattoAdditions', :path => ".."
 end
+
+target 'TestChatto' do
+    pod 'Chatto', :path => ".."
+    pod 'ChattoAdditions', :path => ".."
+end
